@@ -21,5 +21,6 @@ jobs:
           cd prj
           rm -rf deployBE16
           git clone https://github.com/dimasyudhana/latihan-deployment.git
+          ls -al
           cd deployBE16
           go run main.go
