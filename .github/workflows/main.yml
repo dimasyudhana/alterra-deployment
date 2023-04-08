@@ -19,8 +19,8 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd prj
-          rm -rf deployBE16
+          rm -rf latihan-deployment
           git clone https://github.com/dimasyudhana/latihan-deployment.git
           ls -al
-          cd deployBE16
+          cd latihan-deployment
           go run main.go
