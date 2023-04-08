@@ -18,9 +18,6 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd prj
-          rm -rf latihan-deployment
-          git clone https://github.com/dimasyudhana/latihan-deployment.git
-          ls -al
-          cd latihan-deployment
-          go run main.go
+          mkdir buatanAction
+          cd buatanAction
+          touch test.txt
