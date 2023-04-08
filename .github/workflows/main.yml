@@ -27,4 +27,4 @@ jobs:
           docker rm ${{ secrets.CNAME }}
           docker rmi be16prj:alpine
           docker build -t be16prj:alpine .
-          docker run --name ${{ secrets.CNAME }} -d -p 8000:8000 --link mysqlku -e  =${{ secrets.JWT }} be16prj:alpine
+          docker run --name ${{ secrets.CNAME }} -d -p 8080:8080 --link mysql96 -e  =${{ secrets.JWT }} be16prj:alpine
