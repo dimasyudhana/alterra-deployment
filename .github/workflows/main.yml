@@ -19,7 +19,6 @@ jobs:
         port: ${{ secrets.PORT }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
-          script: |
           cd prj/
           rm -rf deployBE16
           git clone https://github.com/dimasyudhana/latihan-deployment.git
@@ -28,4 +27,4 @@ jobs:
           docker rm ${{ secrets.CNAME }}
           docker rmi be16prj:alpine
           docker build -t be16prj:alpine .
-          docker run --name ${{ secrets.CNAME }} -d -p 8000:8000 --link mysqlku -e DBUser=${{ secrets.DBUSER }} -e DBPassword=${{ secrets.DBPASSWORD }} -e DBHost=${{ secrets.DBHOST }} -e DBPort=${{ secrets.DBPORT }} -e DBName=${{ secrets.DBNAME }} -e JWT_SECRET=${{ secrets.JWT }} be16prj:alpine
+          docker run --name ${{ secrets.CNAME }} -d -p 8000:8000 --link mysqlku -e  =${{ secrets.JWT }} be16prj:alpine
