@@ -16,8 +16,8 @@ import (
 func main() {
 	e := echo.New()
 	// Database connection
-	cfg := config.InitConfig()
-	db, err := config.InitDB(*cfg)
+	cfg := config.InitConfiguration()
+	db, err := config.GetConnection(cfg)
 	if err != nil {
 		log.Fatalf("cannot connect to database: %v", err)
 	}
