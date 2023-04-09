@@ -41,8 +41,6 @@ jobs:
           docker stop mysql96
 docker rm mysql96
 docker rmi be16prj:latest
-docker run --name mysql96 -d -p 8080:8080 --network=my-network \
--e USER=${{ secrets.DBUSER }} -e PASSWORD={{ secrets.DBPASSWORD }} -e HOST=${{ secrets.DBHOST }} -e PORT=${{ secrets.DBPORT }} \
--e NAME=${{ secrets.DBNAME }} -e JWT_SECRET=${{ secrets.JWT }} be16prj:latest
+docker run --name mysql96 -d -p 8080:8080 --network=my-network -e USER=${{ secrets.DBUSER }} -e PASSWORD={{ secrets.DBPASSWORD }} -e HOST=${{ secrets.DBHOST }} -e PORT=${{ secrets.DBPORT }} -e NAME=${{ secrets.DBNAME }} -e JWT_SECRET=${{ secrets.JWT }} be16prj:latest
 
 
