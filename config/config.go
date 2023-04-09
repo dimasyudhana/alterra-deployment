@@ -4,8 +4,6 @@ import (
 	"log"
 	"os"
 	"strconv"
-
-	"github.com/joho/godotenv"
 )
 
 var JWTSecret string
@@ -30,11 +28,11 @@ func InitConfiguration() *Configuration {
 func readConfig() *Configuration {
 	var result = new(Configuration)
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Cannot read config variable")
-		return nil
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal("Cannot read config variable")
+	// 	return nil
+	// }
 
 	result.Username = os.Getenv("Username")
 	result.Password = os.Getenv("Password")
