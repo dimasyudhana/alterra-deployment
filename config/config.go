@@ -1,10 +1,11 @@
 package config
 
 import (
+	"log"
 	"os"
 	"strconv"
 
-	"github.com/labstack/gommon/log"
+	"github.com/joho/godotenv"
 )
 
 var JWTSecret string
@@ -29,21 +30,21 @@ func InitConfiguration() *Configuration {
 func readConfig() *Configuration {
 	var result = new(Configuration)
 
-	// err := godotenv.Load(".env")
-	// if err != nil {
-	// 	log.Fatal("Cannot read config variable")
-	// 	return nil
-	// }
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Cannot read config variable")
+		return nil
+	}
 
 	result.Username = os.Getenv("Username")
 	result.Password = os.Getenv("Password")
 	result.Host = os.Getenv("Host")
-	cnvPort, err := strconv.Atoi(os.Getenv("Port"))
+	port, err := strconv.Atoi(os.Getenv("Port"))
 	if err != nil {
-		log.Error("Cannot convert database port: ", err.Error())
+		log.Println("Invalid port number")
 		return nil
 	}
-	result.Port = int(cnvPort)
+	result.Port = port
 	result.Name = os.Getenv("Name")
 	JWTSecret = os.Getenv("JWTSecret")
 	return result
