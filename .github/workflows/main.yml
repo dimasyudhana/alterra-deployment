@@ -40,5 +40,5 @@ jobs:
         script: |
           docker stop ${{ secrets.CNAME }}
           docker rm ${{ secrets.CNAME }}
-          docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/be16prj:latest
+          docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/be16app:latest
           docker run --name ${{ secrets.CNAME }} -d --network="host" -e User=${{ secrets.DBUSER }} -e Password=${{ secrets.DBPASSWORD }} -e Host=${{ secrets.DBHOST }} -e Port=${{ secrets.DBPORT }} -e Name=${{ secrets.DBNAME }} -e JWTSecret=${{ secrets.JWT }} ${{ secrets.DOCKERHUB_USERNAME }}/be16app:latest
