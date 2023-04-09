@@ -38,9 +38,7 @@ jobs:
         port: ${{ secrets.PORT }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
-          docker stop mysql96
-docker rm mysql96
-docker rmi be16prj:latest
-docker run --name mysql96 -d -p 8080:8080 --network=my-network -e USER=${{ secrets.DBUSER }} -e PASSWORD={{ secrets.DBPASSWORD }} -e HOST=${{ secrets.DBHOST }} -e PORT=${{ secrets.DBPORT }} -e NAME=${{ secrets.DBNAME }} -e JWT_SECRET=${{ secrets.JWT }} be16prj:latest
-
-
+          docker stop ${{ secrets.CNAME }}
+          docker rm ${{ secrets.CNAME }}
+          docker rmi be16prj:alpine
+          docker run --name ${{ secrets.CNAME }} -d -p 8080:8080 --link mysql96 -e User=${{ secrets.DBUSER }} -e Password=${{ secrets.DBPASSWORD }} -e Host=${{ secrets.DBHOST }} -e Port=${{ secrets.DBPORT }} -e Name=${{ secrets.DBNAME }} -e JWTSecret=${{ secrets.JWT }} /be16app:latest
