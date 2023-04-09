@@ -11,7 +11,6 @@ func Route(e *echo.Echo, uc users.Handler) {
 	e.Pre(middleware.RemoveTrailingSlash())
 	e.Use(middleware.CORS())
 	e.Use(middleware.Logger())
-	e.Use(middleware.JWT([]byte(config.JWTSecret)))
 
 	e.POST("/users", uc.Register())
 	e.POST("/login", uc.Login())
