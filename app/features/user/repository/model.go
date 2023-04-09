@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 
-	"github.com/dimasyudhana/latihan-deployment.git/app/features/books/repository"
+	"github.com/dimasyudhana/latihan-deployment.git/app/features/book/repository"
 
 	"time"
 )

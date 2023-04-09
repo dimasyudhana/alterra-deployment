@@ -15,4 +15,5 @@ func Route(e *echo.Echo, uc user.Handler) {
 	e.POST("/users", uc.Register())
 	e.POST("/login", uc.Login())
 	e.PUT("/users", uc.Update(), middleware.JWT([]byte(config.JWTSecret)))
+
 }

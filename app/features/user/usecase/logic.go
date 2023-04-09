@@ -4,8 +4,6 @@ import (
 	"errors"
 
 	user "github.com/dimasyudhana/latihan-deployment.git/app/features/user"
-
-	"github.com/labstack/gommon/log"
 )
 
 type UserLogic struct {
@@ -21,9 +19,9 @@ func New(r user.Repository) user.UseCase {
 func (ul *UserLogic) Register(newUser user.Core) error {
 	_, err := ul.m.Register(newUser)
 	if err != nil {
-		log.Error("register logic error:", err.Error())
 		return errors.New("terjadi kesalahan pada server")
 	}
+
 	return nil
 }
 
@@ -57,7 +55,6 @@ func (ul *UserLogic) UpdateByPhone(phone string, username string, email string) 
 func (ul *UserLogic) FindByPhone(phone string) ([]*user.Core, error) {
 	users, err := ul.m.FindByPhone(phone)
 	if err != nil {
-		log.Error("failed to query user by phone:", err.Error())
 		return nil, errors.New("failed to query user by phone")
 	}
 
