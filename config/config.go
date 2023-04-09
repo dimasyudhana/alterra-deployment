@@ -4,8 +4,6 @@ import (
 	"log"
 	"os"
 	"strconv"
-
-	"github.com/joho/godotenv"
 )
 
 var JWTSecret string
@@ -20,10 +18,10 @@ type Configuration struct {
 }
 
 func InitConfiguration() Configuration {
-	err := godotenv.Load()
-	if err != nil {
-		log.Println("Cannot load environment variables")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Println("Cannot load environment variables")
+	// }
 
 	port, err := strconv.Atoi(os.Getenv("Port"))
 	if err != nil {
