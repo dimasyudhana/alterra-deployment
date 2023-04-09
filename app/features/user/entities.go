@@ -1,4 +1,4 @@
-package users
+package user
 
 import (
 	"github.com/labstack/echo/v4"
@@ -20,14 +20,14 @@ type Handler interface {
 
 type UseCase interface {
 	Register(newUser Core) error
-	FindByPhone(phone string) ([]Core, error)
+	FindByPhone(phone string) ([]*Core, error)
 	Login(phone string, password string) (Core, error)
 	UpdateByPhone(phone string, username string, email string) (Core, error)
 }
 
 type Repository interface {
 	Register(newUser Core) (Core, error)
-	FindByPhone(phone string) ([]Core, error)
+	FindByPhone(phone string) ([]*Core, error)
 	Login(phone string, password string) (Core, error)
 	UpdateByPhone(phone string, updatedUser Core) error
 }

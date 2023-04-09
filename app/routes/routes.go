@@ -1,13 +1,13 @@
 package routes
 
 import (
-	"github.com/dimasyudhana/latihan-deployment.git/app/features/users"
+	"github.com/dimasyudhana/latihan-deployment.git/app/features/user"
 	"github.com/dimasyudhana/latihan-deployment.git/config"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func Route(e *echo.Echo, uc users.Handler) {
+func Route(e *echo.Echo, uc user.Handler) {
 	e.Pre(middleware.RemoveTrailingSlash())
 	e.Use(middleware.CORS())
 	e.Use(middleware.Logger())

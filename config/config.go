@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-var JWTSecret string
+var JWTSecret = os.Getenv("JWTSecret")
 
 type Configuration struct {
 	Host     string
@@ -16,34 +16,22 @@ type Configuration struct {
 	Name     string
 }
 
-func InitConfiguration() *Configuration {
-	var cnf = readConfig()
-	if cnf == nil {
-		return nil
-	}
-
-	return cnf
-}
-
-func readConfig() *Configuration {
-	var result = new(Configuration)
-
+func InitConfiguration() Configuration {
 	// err := godotenv.Load()
 	// if err != nil {
-	// 	log.Fatal("Cannot read config variable")
-	// 	return nil
+	// 	log.Println("Cannot load environment variables")
 	// }
 
-	result.Username = os.Getenv("Username")
-	result.Password = os.Getenv("Password")
-	result.Host = os.Getenv("Host")
 	port, err := strconv.Atoi(os.Getenv("Port"))
 	if err != nil {
 		log.Println("Invalid port number")
-		return nil
 	}
-	result.Port = port
-	result.Name = os.Getenv("Name")
-	JWTSecret = os.Getenv("JWTSecret")
-	return result
+
+	return Configuration{
+		Host:     os.Getenv("Host"),
+		Port:     port,
+		Username: os.Getenv("Username"),
+		Password: os.Getenv("Password"),
+		Name:     os.Getenv("Name"),
+	}
 }

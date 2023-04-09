@@ -3,12 +3,12 @@ package repository
 import (
 	"database/sql"
 
-	"time"
-
 	"github.com/dimasyudhana/latihan-deployment.git/app/features/books/repository"
+
+	"time"
 )
 
-type Users struct {
+type User struct {
 	ID               string
 	Username         string `gorm:"type:varchar(255)"`
 	Phone            string `gorm:"primaryKey;type:varchar(15);unique"`

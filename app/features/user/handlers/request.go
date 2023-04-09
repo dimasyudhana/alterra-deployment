@@ -1,4 +1,4 @@
-package handler
+package handlers
 
 type RegisterInput struct {
 	Username         string `json:"username"`

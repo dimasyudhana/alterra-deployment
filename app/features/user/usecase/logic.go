@@ -1,23 +1,24 @@
-package service
+package usecase
 
 import (
 	"errors"
 
-	"github.com/dimasyudhana/latihan-deployment.git/app/features/users"
+	user "github.com/dimasyudhana/latihan-deployment.git/app/features/user"
+
 	"github.com/labstack/gommon/log"
 )
 
 type UserLogic struct {
-	m users.Repository
+	m user.Repository
 }
 
-func New(r users.Repository) users.UseCase {
+func New(r user.Repository) user.UseCase {
 	return &UserLogic{
 		m: r,
 	}
 }
 
-func (ul *UserLogic) Register(newUser users.Core) error {
+func (ul *UserLogic) Register(newUser user.Core) error {
 	_, err := ul.m.Register(newUser)
 	if err != nil {
 		log.Error("register logic error:", err.Error())
@@ -26,38 +27,39 @@ func (ul *UserLogic) Register(newUser users.Core) error {
 	return nil
 }
 
-func (ul *UserLogic) Login(phone string, password string) (users.Core, error) {
+func (ul *UserLogic) Login(phone string, password string) (user.Core, error) {
 	result, err := ul.m.Login(phone, password)
 	if err != nil {
-		return users.Core{}, errors.New("terdapat permasalahan pada server")
+		return user.Core{}, errors.New("terdapat permasalahan pada server")
 	}
 	return result, nil
 }
 
-func (ul *UserLogic) UpdateByPhone(phone string, username string, email string) (users.Core, error) {
+func (ul *UserLogic) UpdateByPhone(phone string, username string, email string) (user.Core, error) {
 	_, err := ul.m.FindByPhone(phone)
 	if err != nil {
-		return users.Core{}, err
+		return user.Core{}, err
 	}
 
-	updatedUser := users.Core{
+	updatedUser := user.Core{
 		Phone:    phone,
 		Username: username,
 		Email:    email,
 	}
 
 	if err := ul.m.UpdateByPhone(phone, updatedUser); err != nil {
-		return users.Core{}, err
+		return user.Core{}, err
 	}
 
 	return updatedUser, nil
 }
 
-func (ul *UserLogic) FindByPhone(phone string) ([]users.Core, error) {
+func (ul *UserLogic) FindByPhone(phone string) ([]*user.Core, error) {
 	users, err := ul.m.FindByPhone(phone)
 	if err != nil {
 		log.Error("failed to query user by phone:", err.Error())
-		return nil, err
+		return nil, errors.New("failed to query user by phone")
 	}
+
 	return users, nil
 }

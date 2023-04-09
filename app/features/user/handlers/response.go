@@ -1,4 +1,4 @@
-package handler
+package handlers
 
 type LoginResponse struct {
 	Phone string `json:"phone"`

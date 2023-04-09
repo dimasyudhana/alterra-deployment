@@ -1,19 +1,20 @@
-package handler
+package handlers
 
 import (
 	"log"
 	"net/http"
 
-	users "github.com/dimasyudhana/latihan-deployment.git/app/features/users"
+	user "github.com/dimasyudhana/latihan-deployment.git/app/features/user"
 	"github.com/dimasyudhana/latihan-deployment.git/helper"
+
 	"github.com/labstack/echo/v4"
 )
 
 type UserController struct {
-	service users.UseCase
+	service user.UseCase
 }
 
-func New(us users.UseCase) users.Handler {
+func New(us user.UseCase) user.Handler {
 	return &UserController{
 		service: us,
 	}
@@ -57,7 +58,7 @@ func (uc *UserController) Register() echo.HandlerFunc {
 			return c.JSON(code, res)
 		}
 
-		//err = uc.service.Register(&users.Core{Username: input.Username, Phone: input.Phone, Email: input.Email, Password: input.Password, Confirm_password: input.Confirm_password})
+		err = uc.service.Register(user.Core{Username: input.Username, Phone: input.Phone, Email: input.Email, Password: input.Password, Confirm_password: input.Confirm_password})
 		if err != nil {
 			if err.Error() == "register logic error: phone number "+input.Phone+" has been registered" {
 				code, res := helper.ResponseFormat(http.StatusConflict, err.Error(), nil)
