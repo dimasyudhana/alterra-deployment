@@ -16,15 +16,13 @@ import (
 func main() {
 	e := echo.New()
 	// Database connection
-	cfg := config.InitConfiguration()
-	db, err := config.GetConnection(cfg)
+	cfg := config.InitConfig()
+	db, err := config.InitDB(*cfg)
 	if err != nil {
 		log.Fatalf("cannot connect to database: %v", err)
 	}
 	log.Println("Connected with database!")
-
-	//Auto migrate input and output to database
-	db.AutoMigrate(userRepo.Users{})
+	config.Migrate(db)
 
 	userModel := userRepo.New(db)
 	userService := userLogic.New(userModel)

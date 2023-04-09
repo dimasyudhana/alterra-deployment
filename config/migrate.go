@@ -2,7 +2,6 @@ package config
 
 import (
 	"github.com/dimasyudhana/latihan-deployment.git/app/features/users/repository"
-
 	"gorm.io/gorm"
 )
 
