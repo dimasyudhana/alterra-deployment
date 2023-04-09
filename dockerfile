@@ -1,15 +1,15 @@
-FROM golang:alpine
+FROM golang:alpine AS builder
 
-RUN mkdir /app
+WORKDIR /app/
 
-##set direktori utama
-WORKDIR /app
+COPY . .
 
-##copy seluruh file ke app
-ADD . /app
+RUN go build -o /app/main /app/main.go
 
-##buat executeable
-RUN go build -o main .
+FROM alpine:latest 
 
-##jalankan executeable
-CMD ["/app/main"]
+WORKDIR /app/
+
+COPY --from=builder /app/ /app/
+
+CMD [ "/app/main" ]
